@@ -124,14 +124,20 @@ public class Atacar {
 						else if(j==x-2) {
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)									
+								principal.quitarVidaAtaque(1);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
+								principal.quitarVidaAtaque(1);
 							}
 							if(tab.tableroIndice[i][j+2]==12 || tab.tableroIndice[i][j+2]==22 || tab.tableroIndice[i][j+2]==32) {
 								//ATACA
+								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
 								principal.quitarVidaAtaque(1);
 							}
 						}
@@ -145,15 +151,21 @@ public class Atacar {
 							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {
 								//ATACA
 								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
+								principal.quitarVidaAtaque(2);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {
 								//ATACA
 								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
+								principal.quitarVidaAtaque(2);
 							}
 							if(tab.tableroIndice[i][j+2]==11 || tab.tableroIndice[i][j+2]==21 || tab.tableroIndice[i][j+2]==31) {
 								//ATACA
+								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
 								principal.quitarVidaAtaque(2);
 							}
 						}
@@ -280,15 +292,21 @@ public class Atacar {
 							if(tab.tableroIndice[i][0]==12 || tab.tableroIndice[i][0]==22 || tab.tableroIndice[i][0]==32) {
 								//ATACA
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
+								principal.quitarVidaAtaque(1);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==22 || tab.tableroIndice[i][j-1]==32) {
 								//ATACA
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
+								principal.quitarVidaAtaque(1);
 							}
 							if(tab.tableroIndice[i][j-2]==12 || tab.tableroIndice[i][j-2]==22 || tab.tableroIndice[i][j-2]==32) {
 								//ATACA
+								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
 								principal.quitarVidaAtaque(1);
 							}
 						}
@@ -302,15 +320,21 @@ public class Atacar {
 							if(tab.tableroIndice[i][0]==11 || tab.tableroIndice[i][0]==21 || tab.tableroIndice[i][0]==31) {
 								//ATACA
 								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
+								principal.quitarVidaAtaque(2);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==21 || tab.tableroIndice[i][j-1]==31) {
 								//ATACA
 								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
+								principal.quitarVidaAtaque(2);
 							}
 							if(tab.tableroIndice[i][j-2]==11 || tab.tableroIndice[i][j-2]==21 || tab.tableroIndice[i][j-2]==31) {
 								//ATACA
+								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)
 								principal.quitarVidaAtaque(2);
 							}
 						}
@@ -439,15 +463,21 @@ public class Atacar {
 							if(tab.tableroIndice[0][j]==12 || tab.tableroIndice[0][j]==22 || tab.tableroIndice[0][j]==32) {
 								//ATACA
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
+								principal.quitarVidaAtaque(1);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {
 								//ATACA
 								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
+								principal.quitarVidaAtaque(1);
 							}
 							if(tab.tableroIndice[i-2][j]==12 || tab.tableroIndice[i-2][j]==22 || tab.tableroIndice[i-2][j]==32) {
 								//ATACA
+								principal.quitarVidaAtaque(1);
+								if(principal.vidaJ2!=0)
 								principal.quitarVidaAtaque(1);
 							}
 						}
@@ -461,16 +491,17 @@ public class Atacar {
 							if(tab.tableroIndice[0][j]==11 || tab.tableroIndice[0][j]==21 || tab.tableroIndice[0][j]==31) {
 								//ATACA
 								principal.quitarVidaAtaque(2);
+								if(principal.vidaJ1!=0)principal.quitarVidaAtaque(2);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {
 								//ATACA
-								principal.quitarVidaAtaque(2);
+								principal.quitarVidaAtaque(2);if(principal.vidaJ1!=0)principal.quitarVidaAtaque(2);
 							}
 							if(tab.tableroIndice[i-2][j]==11 || tab.tableroIndice[i-2][j]==21 || tab.tableroIndice[i-2][j]==31) {
 								//ATACA
-								principal.quitarVidaAtaque(2);
+								principal.quitarVidaAtaque(2);if(principal.vidaJ1!=0)principal.quitarVidaAtaque(2);
 							}
 						}
 					}					
@@ -597,17 +628,17 @@ public class Atacar {
 						else if(i==x-2) {
 							if(tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==22 || tab.tableroIndice[i+1][j]==32) {
 								//ATACA
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);if(principal.vidaJ2!=0)principal.quitarVidaAtaque(1);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==22 || tab.tableroIndice[i+1][j]==32) {
 								//ATACA
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);if(principal.vidaJ2!=0)principal.quitarVidaAtaque(1);
 							}
 							if(tab.tableroIndice[i+2][j]==12 || tab.tableroIndice[i+2][j]==22 || tab.tableroIndice[i+2][j]==32) {
 								//ATACA
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);if(principal.vidaJ2!=0)principal.quitarVidaAtaque(1);
 							}
 						}
 					}
@@ -619,17 +650,17 @@ public class Atacar {
 						else if(i==x-2) {
 							if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==21 || tab.tableroIndice[i+1][j]==31) {
 								//ATACA
-								principal.quitarVidaAtaque(2);
+								principal.quitarVidaAtaque(2);if(principal.vidaJ1!=0)principal.quitarVidaAtaque(1);
 							}
 						}
 						else {
 							if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==21 || tab.tableroIndice[i+1][j]==31) {
 								//ATACA
-								principal.quitarVidaAtaque(2);
+								principal.quitarVidaAtaque(2);if(principal.vidaJ1!=0)principal.quitarVidaAtaque(1);
 							}
 							if(tab.tableroIndice[i+2][j]==11 || tab.tableroIndice[i+2][j]==21 || tab.tableroIndice[i+2][j]==31) {
 								//ATACA
-								principal.quitarVidaAtaque(2);
+								principal.quitarVidaAtaque(2);if(principal.vidaJ1!=0)principal.quitarVidaAtaque(1);
 							}
 						}
 					}					
@@ -647,123 +678,278 @@ public class Atacar {
 						if(i==0 && j==0) {
 							if(tab.tableroIndice[0][1]==12 || tab.tableroIndice[0][1]==22 || tab.tableroIndice[0][1]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[1][0]==12 || tab.tableroIndice[1][0]==22 || tab.tableroIndice[1][0]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(i==0 && j==x-1) {
 							if(tab.tableroIndice[0][j-1]==12 || tab.tableroIndice[0][j-1]==22 || tab.tableroIndice[0][j-1]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[1][j]==12 || tab.tableroIndice[1][j]==22 || tab.tableroIndice[1][j]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(i==x-1 && j==0) {
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(i==x-1 && j==x-1) {
 							if(tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==22 || tab.tableroIndice[i][j-1]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(i==0) {
 							if(tab.tableroIndice[0][j-1]==12 || tab.tableroIndice[0][j-1]==22 || tab.tableroIndice[0][j-1]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[0][j+1]==12 || tab.tableroIndice[0][j+1]==22 || tab.tableroIndice[0][j+1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[1][j]==12 || tab.tableroIndice[1][j]==22 || tab.tableroIndice[1][j]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(j==0) {
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==22 || tab.tableroIndice[i+1][j]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(i==x-1) {
 							if(tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==22 || tab.tableroIndice[i][j-1]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {							
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {							
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else if(j==x-1) {
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==22 || tab.tableroIndice[i+1][j]==32) {							
-								principal.quitarVidaAtaque(1);
+								principal.quitarVidaAtaque(1);principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==22 || tab.tableroIndice[i][j-1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 						else {
 							if(tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==32) {
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==22 || tab.tableroIndice[i+1][j]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==22 || tab.tableroIndice[i][j+1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 							if(tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==22 || tab.tableroIndice[i][j-1]==32) {							
 								principal.quitarVidaAtaque(1);
+								principal.turnoJ1=true;
+								principal.turnoJ2=false;
 							}
 						}
 					}
 					else if(personaje==12) {
 						if(i==0 && j==0) {
-							
+							if(tab.tableroIndice[0][1]==11 || tab.tableroIndice[0][1]==21 || tab.tableroIndice[0][1]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[1][0]==11 || tab.tableroIndice[1][0]==21 || tab.tableroIndice[1][0]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(i==0 && j==x-1) {
-							
+							if(tab.tableroIndice[0][j-1]==11 || tab.tableroIndice[0][j-1]==21 || tab.tableroIndice[0][j-1]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[1][j]==11 || tab.tableroIndice[1][j]==21 || tab.tableroIndice[1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(i==x-1 && j==0) {
-							
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(i==x-1 && j==x-1) {
-							
+							if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==21 || tab.tableroIndice[i][j-1]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(i==0) {
-							
+							if(tab.tableroIndice[0][j-1]==11 || tab.tableroIndice[0][j-1]==21 || tab.tableroIndice[0][j-1]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[0][j+1]==11 || tab.tableroIndice[0][j+1]==21 || tab.tableroIndice[0][j+1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[1][j]==11 || tab.tableroIndice[1][j]==21 || tab.tableroIndice[1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(j==0) {
-							
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==21 || tab.tableroIndice[i+1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(i==x-1) {
-							
+							if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==21 || tab.tableroIndice[i][j-1]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else if(j==x-1) {
-							
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==21 || tab.tableroIndice[i+1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==21 || tab.tableroIndice[i][j-1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
 						else {
-							
+							if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==21 || tab.tableroIndice[i-1][j]==31) {
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==21 || tab.tableroIndice[i+1][j]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==21 || tab.tableroIndice[i][j+1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
+							if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==21 || tab.tableroIndice[i][j-1]==31) {							
+								principal.quitarVidaAtaque(2);
+								principal.turnoJ1=false;
+								principal.turnoJ2=true;
+							}
 						}
-					}
+					}	
 				}
 			}
 		}

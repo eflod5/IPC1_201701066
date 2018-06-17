@@ -11,8 +11,7 @@ public class Tablero extends JPanel {
 	public Integer [][] tableroIndice;
 	public int tam;
 	public Image fondo;
-	public int personajes=6;
-	private int personajeAgg,personajeQuitar;
+	public int personajes=6;	
 	public boolean mago1 = true;
 	public boolean mago2 = true;
 	public boolean p1 = true;
@@ -79,7 +78,68 @@ public class Tablero extends JPanel {
 			}
 		}				
 	}	
-	public void aggJugadoresCentro(int tam,int personaje,String ruta) {		
+	
+	public void aggJugadoresCentro(int tam,int personaje,String ruta) {
+		int centro, i, iz, der, vuelta = 0;
+		
+		centro = (int)(tam/2);
+		
+		while(vuelta<= centro) {
+			if(vuelta==0) {
+				if(tableroIndice[centro][centro] ==2) {
+					tablero[centro][centro].setIcon(new ImageIcon(getClass().getResource(ruta)));					
+					tablero[centro][centro].setHorizontalAlignment(JLabel.CENTER);
+					tablero[centro][centro].setVerticalAlignment(JLabel.CENTER);
+					tableroIndice[centro][centro]=personaje;
+					return;
+				}
+				vuelta++;
+			}
+			else {
+				while(vuelta<=centro) { //izquierda
+					for (iz = (centro + vuelta - 1); iz >= (centro - vuelta + 1); iz--) {
+						if(tableroIndice[iz][centro-vuelta]==2) {
+							tablero[iz][centro-vuelta].setIcon(new ImageIcon(getClass().getResource(ruta)));					
+							tablero[iz][centro-vuelta].setHorizontalAlignment(JLabel.CENTER);
+							tablero[iz][centro-vuelta].setVerticalAlignment(JLabel.CENTER);
+							tableroIndice[iz][centro-vuelta]=personaje;
+							return;
+						}               
+                    }
+					for (i = (-vuelta); i <= (vuelta); i++) {                           // fila superior
+                        if(tableroIndice[centro-vuelta][centro+1]==2) {
+                        	tablero[centro-vuelta][centro+1].setIcon(new ImageIcon(getClass().getResource(ruta)));					
+							tablero[centro-vuelta][centro+1].setHorizontalAlignment(JLabel.CENTER);
+							tablero[centro-vuelta][centro+1].setVerticalAlignment(JLabel.CENTER);
+							tableroIndice[centro-vuelta][centro+1]=personaje;
+							return;
+                        }						
+                    }
+					for (der = (centro - vuelta + 1); der <= (centro + vuelta - 1); der++) {        // derecha
+                       if(tableroIndice[der][centro+vuelta]==2) {
+                    	   	tablero[der][centro+vuelta].setIcon(new ImageIcon(getClass().getResource(ruta)));					
+       						tablero[der][centro+vuelta].setHorizontalAlignment(JLabel.CENTER);
+       						tablero[der][centro+vuelta].setVerticalAlignment(JLabel.CENTER);
+       						tableroIndice[der][centro+vuelta]=personaje;
+       						return;
+                       }						
+                    }
+					for (i = (centro + vuelta); i >= (centro - vuelta); i--) {          // fila inferior 
+						if(tableroIndice[centro+vuelta][i]==2) {
+							tablero[centro+vuelta][i].setIcon(new ImageIcon(getClass().getResource(ruta)));					
+							tablero[centro+vuelta][i].setHorizontalAlignment(JLabel.CENTER);
+							tablero[centro+vuelta][i].setVerticalAlignment(JLabel.CENTER);
+							tableroIndice[centro+vuelta][i]=personaje;
+							return;
+						}						
+                    }
+					vuelta++;
+				}
+			}
+		}
+	}
+	
+	public void xxx(int tam,int personaje,String ruta) {		
 		int x=((tam/2));
 		if(tableroIndice[x][x]==2) {
 			tablero[x][x].setIcon(new ImageIcon(getClass().getResource(ruta)));					
@@ -250,18 +310,4 @@ public class Tablero extends JPanel {
 		}
 		g.drawImage(fondo,0,0,width,height,null);		
 	}				
-	public int getQuitarVida() {
-		return personajeQuitar;
-	}	
-	public int getAgregarVida() {
-		return personajeAgg;
-	}	
-	public void setAgregarVida(int personajeAgg) {
-		this.personajeAgg=personajeAgg;
-		
-	}	
-	public void setQuitarVida(int personajeQuitar) {
-		this.personajeQuitar=personajeQuitar;
-	}	
-	
 }

@@ -3,10 +3,15 @@ import java.awt.*;
 import objetos.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
 public class Principal extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Tablero tablero;	
 	private JPanel funciones;
 	private JMenuBar menu;
@@ -16,21 +21,25 @@ public class Principal extends JFrame implements ActionListener{
 	private JLabel labelTiempo, labelJ1,labelJ2,labelP1,labelP2,labelP3,labelP1J2,labelP2J2,labelP3J2;
 	private boolean iniciado = true;
 	private Cronometro cronometro;
-	private Opciones opciones;
+	private Opciones opciones;	
 	private Turno turno;	
 	private int direccion=0;	
 	public String p1,p2,p3,p11,p22,p33,r1j1,r2j1,r3j1,r1j2,r2j2,r3j2,ruta;
-	private boolean a,b,c,aa,bb,cc,turnoJ1,turnoJ2;
+	private boolean a,b,c,aa,bb,cc;
+	public boolean turnoJ1,turnoJ2;
 	private int p1j1,p2j1,p3j1,p1j2,p2j2,p3j2,x,dim,personaje;	
-	public int vidaJ1,vidaJ2;
+	public int vidaJ1,vidaJ2,espera1=1,espera2=1;
 	public Vida vidas;		
+	public Jugador[] vecJugador;
+	public boolean vectorCreado=false;
+	public Top10 top;
 	
 	public Principal() {
 		super("Arcade Game");		
 		dim=14;
 		iniciado=true;
 		tablero = new Tablero(dim);					
-		cronometro = new Cronometro(tablero,this);
+		cronometro = new Cronometro(tablero,this);		
 		this.getContentPane().add(cronometro).setVisible(true);
 		this.getContentPane().add(tablero).setVisible(true);
 		add(getJMenuBar());
@@ -58,8 +67,19 @@ public class Principal extends JFrame implements ActionListener{
 			labelP2J2.setBackground(null);
 			labelP3J2.setBackground(null);
 			atacar.setEnabled(false);
-		cronometro.pararCronometro();
+			System.out.println(cronometro.getMinutos() + "" + cronometro.getSegundos());
+		cronometro.pararCronometro();		
 		this.getContentPane().add(cronometro).setVisible(false);
+		
+		if(vidaJ1>vidaJ2) {
+			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ1(), "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (vidaJ2>vidaJ1) {
+			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ2(), "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ1() + " Y " + opciones.getNombreJ2(), "EMPATE", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	public void init() {
@@ -71,6 +91,24 @@ public class Principal extends JFrame implements ActionListener{
 		setResizable(false);
 	}
 		
+	public void prueba() {
+		top = new Top10();
+		top.crear();
+		
+		try {
+			vecJugador=top.optenerJugadores("Top10.txt");
+		}
+		catch(IOException ex){		
+		}
+		
+		
+		int tam = vecJugador.length;
+		for(int i =0; i<tam;i++) {
+			System.out.println(i + " " + vecJugador[i].getGanador());
+		}
+		vectorCreado=true;
+	}
+	
 	public JMenuBar getJMenuBar(){
 		menu = new JMenuBar();
 		inicio = new JMenu("Inicio");		
@@ -326,7 +364,8 @@ public class Principal extends JFrame implements ActionListener{
 	}
 	
 	public void tirarDados() {
-		x = (int) (Math.random()*6+1);
+		int i=100;		
+		x = (int) (Math.random()*6+1);		
 		if(x==1) {
 			labelTiempo.setIcon(new ImageIcon(getClass().getResource("/imagenes/uno.png")));
 		}
@@ -344,14 +383,15 @@ public class Principal extends JFrame implements ActionListener{
 		}
 		else if(x==6) {
 			labelTiempo.setIcon(new ImageIcon(getClass().getResource("/imagenes/seis.png")));
-		}
+		}		
 		arriba.setEnabled(true);
 		abajo.setEnabled(true);
 		derecha.setEnabled(true);
 		izquierda.setEnabled(true);
 		tirar.setEnabled(false);
 	}	
-	public void determinaTurno() {				
+	public void determinaTurno() {			
+		
 		if(turnoJ1) {
 			if(a) {
 				personaje = p1j1;
@@ -402,7 +442,7 @@ public class Principal extends JFrame implements ActionListener{
 				labelP3J2.setBackground(null);
 			}
 		}		
-		else if(turnoJ2) {
+		else if(turnoJ2) {	
 			if(aa) {
 				personaje = p1j2;
 				ruta = r1j2;
@@ -456,47 +496,51 @@ public class Principal extends JFrame implements ActionListener{
 	
 	public void moverArriba() {
 		direccion = 0;		
-		Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta);			
+		Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta,this);			
 		mov.start();
 	}
 	
 	public void moverAbajo() {
 		direccion = 1;
-		 Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta);
+		 Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta,this);
 		 mov.start();		 
 	}
 	
 	public void moverDerecha() {
 		 direccion = 2;			 
-		 Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta);
+		 Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta,this);
 		 mov.start();
 		 
 	}
 	
 	public void moverIzquierda() {
 		direccion = 3;			 
-		Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta);
+		Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta,this);
 		mov.start();		
 	}
 	
-	public void agregarVidas() {
-		if(tablero.getAgregarVida()==1) {
-			vidaJ1++;			
+	public void agregarVidas(int jugador) {
+		if(jugador==1) {
+			vidaJ1++;	
+			vidas.aggVidasJ1(vidaJ1);
 		}
-		else if(tablero.getAgregarVida()==2) {
+		else if(jugador==2) {
 			vidaJ2++;			
+			vidas.aggVidasJ2(vidaJ2);
 		}
 		else {
 			
 		}
 	}
 	
-	public void quitarVidas() {
-		if(tablero.getQuitarVida()==1) {
-			vidaJ1--;			
+	public void quitarVidas(int jugador) {
+		if(jugador==1) {
+			vidaJ1--;	
+			vidas.aggVidasJ1(vidaJ1);
 		}
-		else if(tablero.getQuitarVida()==2) {
-			vidaJ2--;			
+		else if(jugador==2) {
+			vidaJ2--;		
+			vidas.aggVidasJ2(vidaJ2);
 		}
 		else {
 			
@@ -515,11 +559,12 @@ public class Principal extends JFrame implements ActionListener{
 	}
 	
 	public void siguienteTurno() {
-		agregarVidas();
-		quitarVidas();
-		vidas.aggVidasJ1(vidaJ1);
-		vidas.aggVidasJ2(vidaJ2);
-		tirar.setEnabled(true);		
+		//agregarVidas();
+		//quitarVidas();
+		//vidas.aggVidasJ1(vidaJ1);
+		//vidas.aggVidasJ2(vidaJ2);
+		tirar.setEnabled(true);	
+		prueba();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -580,6 +625,7 @@ public class Principal extends JFrame implements ActionListener{
 			 if(personaje==11 || personaje==12) {
 				 Atacar ataque = new Atacar(tablero,personaje,this);
 				 ataque.atacarPrincesa(personaje);
+				 atacar.setEnabled(false);
 			 }
 			 else {
 			 atacaDerecha.setEnabled(true);

@@ -17,22 +17,25 @@ public class Movimiento extends Thread{
 	private int quitarVida=0,agregarVida=0;
 	private int posXbomba, posYbomba,posXvida,posYvida;
 	private boolean pasarBomba = false,pasarVida=false;
-	
-	public Movimiento() {
+	private Principal principal;
 		
-	}
 	
-	public Movimiento(int cantidad, Tablero tab, int direccion,int personaje,String ruta) {
+	public Movimiento(int cantidad, Tablero tab, int direccion,int personaje,String ruta,Principal principal) {
 		this.cantidad=cantidad;
 		setDireccion(direccion);
 		this.personaje=personaje;
 		this.ruta=ruta;
 		setTablero(tab);	
+		setPrincipal(principal);
 	}
 	public Movimiento(int cantidad, Tablero tab,int direccion) {
 		this.cantidad=cantidad;
 		this.direccion=direccion;
 		setTablero(tab);
+	}
+	
+	public void setPrincipal (Principal principal) {
+		this.principal=principal;
 	}
 	
 	public void setCantidad(int cantidad) {
@@ -77,11 +80,13 @@ public class Movimiento extends Thread{
 							tab.aggJugadoresCentro(x, personaje, ruta);
 							if(personaje==12 || personaje==22 || personaje==32) {
 								quitarVida = 2;			
-								tab.setQuitarVida(quitarVida);												
+								principal.quitarVidas(2);
+								//tab.setQuitarVida(quitarVida);												
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
-								quitarVida = 1;			
-								tab.setQuitarVida(quitarVida);								
+								quitarVida = 1;
+								principal.quitarVidas(quitarVida);
+								//tab.setQuitarVida(quitarVida);								
 							}
 							if(pasarBomba) {
 								pintarBomba();
@@ -95,7 +100,7 @@ public class Movimiento extends Thread{
 						}
 						else {
 							quitarVida=0;							
-							tab.setQuitarVida(quitarVida);
+							//tab.setQuitarVida(quitarVida);
 						}
 						
 						if(tab.tableroIndice[i][j+1]==11 || tab.tableroIndice[i][j+1]==12 || tab.tableroIndice[i][j+1]==21
@@ -115,32 +120,36 @@ public class Movimiento extends Thread{
 						
 						if(tab.tableroIndice[i][j+1] ==0 && cantidad==1) {	
 							if(personaje==12 || personaje==22 || personaje==32) {							
-								quitarVida = 2;								
-								tab.setQuitarVida(quitarVida);			
+								quitarVida = 2;	
+								principal.quitarVidas(quitarVida);
+								//tab.setQuitarVida(quitarVida);			
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
-								quitarVida = 1;							
-								tab.setQuitarVida(quitarVida);
+								quitarVida = 1;
+								principal.quitarVidas(quitarVida);
+								//tab.setQuitarVida(quitarVida);
 							}							
 						}
 						else {
 							quitarVida=0;							
-							tab.setQuitarVida(quitarVida);							
+							//tab.setQuitarVida(quitarVida);							
 						}
 						
 						if(tab.tableroIndice[i][j+1] == 1 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {							
 								agregarVida=2;
-								tab.setAgregarVida(agregarVida);							
+								principal.agregarVidas(agregarVida);
+								//tab.setAgregarVida(agregarVida);							
 							}							
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								agregarVida=1;
-								tab.setAgregarVida(agregarVida);								
+								principal.agregarVidas(agregarVida);
+								//tab.setAgregarVida(agregarVida);								
 							}																	
 						}	
 						else {						
 							agregarVida=0;							
-							tab.setAgregarVida(agregarVida);
+							//tab.setAgregarVida(agregarVida);
 						}
 						
 						if(pasarBomba) {
@@ -200,11 +209,11 @@ public class Movimiento extends Thread{
 							tab.aggJugadoresCentro(x, personaje, ruta);
 							if(personaje==12 || personaje==22 || personaje==32) {
 								quitarVida=2;								
-								tab.setQuitarVida(quitarVida);								
+								principal.quitarVidas(quitarVida);								
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {								
 								quitarVida=1;								
-								tab.setQuitarVida(quitarVida);							
+								principal.quitarVidas(quitarVida);							
 							}
 							if(pasarBomba) {
 								pintarBomba();
@@ -217,8 +226,7 @@ public class Movimiento extends Thread{
 							return;							
 						}
 						else {
-							quitarVida=0;							
-							tab.setQuitarVida(quitarVida);							
+							quitarVida=0;																	
 						}
 						
 						if(tab.tableroIndice[i][j-1]==11 || tab.tableroIndice[i][j-1]==12 || tab.tableroIndice[i][j-1]==21
@@ -239,31 +247,29 @@ public class Movimiento extends Thread{
 						if(tab.tableroIndice[i][j-1] ==0 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {							
 								quitarVida=2;								
-								tab.setQuitarVida(quitarVida);
+								principal.quitarVidas(quitarVida);
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								quitarVida=1;								
-								tab.setQuitarVida(quitarVida);								
+								principal.quitarVidas(quitarVida);						
 							}											
 						}
 						else {
-							quitarVida=0;							
-							tab.setQuitarVida(quitarVida);							
+							quitarVida=0;																		
 						}
 						
 						if(tab.tableroIndice[i][j-1] ==1 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {							
 								agregarVida=2;
-								tab.setAgregarVida(agregarVida);
+								principal.agregarVidas(agregarVida);
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								agregarVida=1;
-								tab.setAgregarVida(agregarVida);					
+								principal.agregarVidas(agregarVida);
 							}								
 						}
 						else {							
-							agregarVida=0;						
-							tab.setAgregarVida(agregarVida);
+							agregarVida=0;													
 						}						
 						if(pasarBomba) {
 							pintarBomba();
@@ -321,11 +327,11 @@ public class Movimiento extends Thread{
 							tab.aggJugadoresCentro(x, personaje, ruta);
 							if(personaje==12 || personaje==22 || personaje==32) {
 								quitarVida=2;								
-								tab.setQuitarVida(quitarVida);												
+								principal.quitarVidas(quitarVida);												
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								quitarVida=1;
-								tab.setQuitarVida(quitarVida);													
+								principal.quitarVidas(quitarVida);												
 							}
 							if(pasarBomba) {
 								pintarBomba();
@@ -339,7 +345,7 @@ public class Movimiento extends Thread{
 						}
 						else {							
 							quitarVida=0;						
-							tab.setQuitarVida(quitarVida);
+							
 						}						
 						if(tab.tableroIndice[i-1][j]==11 || tab.tableroIndice[i-1][j]==12 || tab.tableroIndice[i-1][j]==21
 								|| tab.tableroIndice[i-1][j]==22 || tab.tableroIndice[i-1][j]==31 || tab.tableroIndice[i-1][j]==32) {
@@ -358,31 +364,31 @@ public class Movimiento extends Thread{
 						if(tab.tableroIndice[i-1][j] ==0 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {							
 								quitarVida=2;
-								tab.setQuitarVida(quitarVida);																				
+								principal.quitarVidas(quitarVida);																		
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								quitarVida=1;								
-								tab.setQuitarVida(quitarVida);
+								principal.quitarVidas(quitarVida);
 										
 							}							
 						}
 						else {
 							quitarVida=0;							
-							tab.setQuitarVida(quitarVida);							
+												
 						}
 						if(tab.tableroIndice[i-1][j] ==1 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {							
 								agregarVida=2;								
-								tab.setAgregarVida(agregarVida);														
+								principal.agregarVidas(agregarVida);														
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								agregarVida=1;								
-								tab.setAgregarVida(agregarVida);						
+								principal.agregarVidas(agregarVida);					
 							}													
 						}
 						else {
 							agregarVida=0;
-							tab.setAgregarVida(agregarVida);
+							//tab.setAgregarVida(agregarVida);
 						}
 						if(pasarBomba) {
 							pintarBomba();
@@ -441,11 +447,11 @@ public class Movimiento extends Thread{
 							tab.aggJugadoresCentro(x, personaje, ruta);
 							if(personaje==12 || personaje==22 || personaje==32) {
 								quitarVida = 2;
-								tab.setQuitarVida(quitarVida);								
+								principal.quitarVidas(quitarVida);								
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {
 								quitarVida =1;
-								tab.setQuitarVida(quitarVida);							
+								principal.quitarVidas(quitarVida);					
 							}
 							if(pasarBomba) {
 								pintarBomba();
@@ -458,8 +464,7 @@ public class Movimiento extends Thread{
 							return;							
 						}
 						else {
-							quitarVida=0;
-							tab.setQuitarVida(quitarVida);
+							quitarVida=0;							
 						}
 						
 						if(tab.tableroIndice[i+1][j]==11 || tab.tableroIndice[i+1][j]==12 || tab.tableroIndice[i+1][j]==21
@@ -479,34 +484,30 @@ public class Movimiento extends Thread{
 						if(tab.tableroIndice[i+1][j] ==0 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {									
 								quitarVida=2;
-								tab.setQuitarVida(quitarVida);
+								principal.quitarVidas(quitarVida);
 																				
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {								
 								quitarVida=1;
-								tab.setQuitarVida(quitarVida);
+								principal.quitarVidas(quitarVida);
 																						
 							}							
 						}
 						else {
-							quitarVida=0;
-							tab.setQuitarVida(quitarVida);
+							quitarVida=0;							
 						}
 						if(tab.tableroIndice[i+1][j] ==1 && cantidad==1) {
 							if(personaje==12 || personaje==22 || personaje==32) {								
 								agregarVida=2;
-								
-								tab.setAgregarVida(agregarVida);							
+								principal.agregarVidas(agregarVida);													
 							}
 							else if(personaje==11 || personaje ==21 || personaje==31) {								
 								agregarVida=1;
-								
-								tab.setAgregarVida(agregarVida);						
+								principal.agregarVidas(agregarVida);					
 							}							
 						}
 						else {
-							agregarVida=0;
-							tab.setAgregarVida(agregarVida);
+							agregarVida=0;							
 						}
 						if(pasarBomba) {
 							pintarBomba();
