@@ -15,8 +15,8 @@ public class Principal extends JFrame implements ActionListener{
 	private Tablero tablero;	
 	private JPanel funciones;
 	private JMenuBar menu;
-	private JMenu inicio,opcionesMenu,top10;
-	private JMenuItem juegoNuevo,salir,configuracion,pausar,reanudar,terminarJuego;
+	private JMenu inicio,opcionesMenu,record;
+	private JMenuItem juegoNuevo,salir,configuracion,pausar,reanudar,terminarJuego,top10;
 	private JButton arriba,abajo,izquierda,derecha,tirar,atacar,terminar,atacaArriba,atacaAbajo,atacaIzquierda,atacaDerecha;
 	private JLabel labelTiempo, labelJ1,labelJ2,labelP1,labelP2,labelP3,labelP1J2,labelP2J2,labelP3J2;
 	private boolean iniciado = true;
@@ -44,7 +44,8 @@ public class Principal extends JFrame implements ActionListener{
 		this.getContentPane().add(tablero).setVisible(true);
 		add(getJMenuBar());
 		add(getPanelFunciones());
-		init();						
+		init();					
+		prueba();
 	}	
 	
 	public void terminarJuego() {		
@@ -73,13 +74,31 @@ public class Principal extends JFrame implements ActionListener{
 		
 		if(vidaJ1>vidaJ2) {
 			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ1(), "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+			int tiempo = cronometro.getMinutos()*60 + cronometro.getSegundos();
+			if(tiempo<vecJugador[9].getTiempo()) {
+				vecJugador[9] = new Jugador(opciones.getNombreJ1(),opciones.getNombreJ2(),opciones.getPersonaje1J1(),opciones.getPersonaje2J1(),opciones.getPersonaje3J1(),opciones.getPersonaje1J2(),opciones.getPersonaje2J2(),opciones.getPersonaje3J2(),opciones.getNombreJ1(),vidaJ1,vidaJ2,tiempo);
+			}
 		}
 		else if (vidaJ2>vidaJ1) {
 			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ2(), "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+			int tiempo = cronometro.getMinutos()*60 + cronometro.getSegundos();
+			if(tiempo<vecJugador[9].getTiempo()) {
+				vecJugador[9] = new Jugador(opciones.getNombreJ1(),opciones.getNombreJ2(),opciones.getPersonaje1J1(),opciones.getPersonaje2J1(),opciones.getPersonaje3J1(),opciones.getPersonaje1J2(),opciones.getPersonaje2J2(),opciones.getPersonaje3J2(),opciones.getNombreJ2(),vidaJ1,vidaJ2,tiempo);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Ganador: " + opciones.getNombreJ1() + " Y " + opciones.getNombreJ2(), "EMPATE", JOptionPane.INFORMATION_MESSAGE);
+			int tiempo = cronometro.getMinutos()*60 + cronometro.getSegundos();
+			if(tiempo<vecJugador[9].getTiempo() && tiempo<vecJugador[8].getTiempo()) {
+				vecJugador[8] = new Jugador(opciones.getNombreJ1(),opciones.getNombreJ2(),opciones.getPersonaje1J1(),opciones.getPersonaje2J1(),opciones.getPersonaje3J1(),opciones.getPersonaje1J2(),opciones.getPersonaje2J2(),opciones.getPersonaje3J2(),opciones.getNombreJ1(),vidaJ1,vidaJ2,tiempo);
+				vecJugador[9] = new Jugador(opciones.getNombreJ1(),opciones.getNombreJ2(),opciones.getPersonaje1J1(),opciones.getPersonaje2J1(),opciones.getPersonaje3J1(),opciones.getPersonaje1J2(),opciones.getPersonaje2J2(),opciones.getPersonaje3J2(),opciones.getNombreJ2(),vidaJ1,vidaJ2,tiempo);
+			}
 		}
+		ordenar(vecJugador);
+		top.guardarDatos("Top10.txt", vecJugador);
+		for (int i = 0; i < vecJugador.length; i++) {
+			System.out.println(vecJugador[i].getGanador() + " " + vecJugador[i].getTiempo());
+		}			
 	}
 
 	public void init() {
@@ -102,18 +121,38 @@ public class Principal extends JFrame implements ActionListener{
 		}
 		
 		
-		int tam = vecJugador.length;
+		int tam = vecJugador.length;				
+		ordenar(vecJugador);
+		
 		for(int i =0; i<tam;i++) {
-			System.out.println(i + " " + vecJugador[i].getGanador());
+			System.out.println(i + " " + vecJugador[i].getGanador() + " " + vecJugador[i].getTiempo());
+		}		
+	}
+	
+	public void ordenar(Jugador[] jugador) {
+		int p,j;
+		Jugador aux;
+		int tam = jugador.length;
+		for(p=1;p<tam;p++) {
+			aux = jugador[p];
+			j=p-1;
+			while((j>=0) && aux.getTiempo() <jugador[j].getTiempo()) {
+				jugador[j+1]=jugador[j];
+				j--;
+			}
+			jugador[j+1]=aux;
 		}
-		vectorCreado=true;
 	}
 	
 	public JMenuBar getJMenuBar(){
 		menu = new JMenuBar();
 		inicio = new JMenu("Inicio");		
 		opcionesMenu = new JMenu("Opciones");
-		top10 = new JMenu("Top 10");
+		record = new JMenu("Record");
+		
+		top10 = new JMenuItem("Top 10");
+		top10.addActionListener(this);
+		record.add(top10);
 		
 		terminarJuego = new JMenuItem("Terminar Juego");
 		terminarJuego.addActionListener(this);
@@ -145,7 +184,7 @@ public class Principal extends JFrame implements ActionListener{
 				
 		menu.add(inicio);		
 		menu.add(opcionesMenu);
-		menu.add(top10);		
+		menu.add(record);		
 		menu.setBounds(0, 0, 900,30);		
 		return menu;
 	}
@@ -360,6 +399,7 @@ public class Principal extends JFrame implements ActionListener{
 			vidas.getPanelJ2().setVisible(true);		
 			vidas.aggVidasJ1(vidaJ1);
 			vidas.aggVidasJ2(vidaJ2);
+			prueba();
 		}
 	}
 	
@@ -494,6 +534,23 @@ public class Principal extends JFrame implements ActionListener{
 		}
 	}	
 	
+	public void top10() {
+		JFrame top = new JFrame("Top 10");
+		top.setSize(200, 330);
+		top.setLocationRelativeTo(null);
+		top.setResizable(false);
+		top.setLayout(null);
+		DefaultListModel modelo=new DefaultListModel();
+		JList lista = new JList();
+		int x = vecJugador.length;
+		for (int i = 0; i < x; i++) {
+			modelo.addElement((i+1) + " " + vecJugador[i].getGanador() + " --- " + vecJugador[i].getTiempo());
+		}			
+		lista.setBounds(10, 10, 150, 280);
+		lista.setModel(modelo);	
+		top.add(lista);
+		top.setVisible(true);		
+	}
 	public void moverArriba() {
 		direccion = 0;		
 		Movimiento mov = new Movimiento(x,tablero,direccion,personaje,ruta,this);			
@@ -563,8 +620,7 @@ public class Principal extends JFrame implements ActionListener{
 		//quitarVidas();
 		//vidas.aggVidasJ1(vidaJ1);
 		//vidas.aggVidasJ2(vidaJ2);
-		tirar.setEnabled(true);	
-		prueba();
+		tirar.setEnabled(true);		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -690,11 +746,13 @@ public class Principal extends JFrame implements ActionListener{
 		 else if (e.getSource()==terminar) {
 			 siguienteTurno();
 			 terminar.setEnabled(false);
-			 atacar.setEnabled(false);
-			 tablero.iMat(dim);
+			 atacar.setEnabled(false);			 
 		 }
 		 else if(e.getSource()==terminarJuego) {
 			 terminarJuego();
+		 }
+		 else if(e.getSource()==top10) {
+			 top10();
 		 }
 	}		
 }
