@@ -1,10 +1,10 @@
+kdofsaj,safd,Princesa,Mago,Caballero,Princesa,Mago,Caballero,kdofsaj,5,5,4
+kdofsaj,safd,Princesa,Mago,Caballero,Princesa,Mago,Caballero,safd,5,5,4
 asdfl,sdf,Princesa,Mago,Caballero,Mago,Caballero,Princesa,asdfl,1,0,32
 Erik,Gerardo,Princesa,Caballero,Mago,Princesa,Mago,Caballero,Erik,3,0,58
+Erik,Gerardo,Princesa,Mago,Caballero,Princesa,Mago,Caballero,Erik,2,0,71
+Erik,Gerardo,Princesa,Mago,Caballero,Princesa,Mago,Caballero,Erik,2,0,71
 Joselyne,Maria,Mago,Caballero,Princesa,Princesa,Mago,Caballero,Joselyne,6,0,115
-xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
-xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
-xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
-xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
 xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
 xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
 xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1000,1000,1000
