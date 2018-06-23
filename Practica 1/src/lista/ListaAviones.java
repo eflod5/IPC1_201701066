@@ -31,48 +31,22 @@ public class ListaAviones extends ListaDoble{
 		}
 	}
 	
-	public void eliminaAvion() {
+	public void eliminaAvion(ColaAvion cAvion) {
 		for(int i = 0; i<getSize(); i++) {
 			Avion a = (Avion)getElemento(i);
 			if(a.getTurnosDesabordaje()<=0) {
 				eliminarElemento(i);
+				cAvion.setAvion(a);
 			}
 		}
 	}
-	
-	public void eliminarAvion() {
-		for(int i = 0; i<getSize(); i++) {
-			Avion a = (Avion)getElemento(i);						
-			if(inicio!=null) {
-				Nodo aux =inicio;
-				Nodo ant =null;				
-				while(aux!=null) {
-					if(a.getTurnosDesabordaje()==0) {
-						if(ant==null) {
-							inicio = inicio.getSiguiente();
-							aux.setSiguiente(null);
-							aux=inicio;
-						}
-						else {
-							ant.setSiguiente(aux.getSiguiente());
-							aux.setSiguiente(null);
-							aux=ant.getSiguiente();
-						}
-					}
-					else {
-						ant = aux;
-						aux = aux.getSiguiente();
-					}
-				}
-			}
-		}		
-	}
+		
 	
 	public void printAviones(JTextArea txt) {
 		for(int i=0 ; i<getSize();i++) {
 			Avion a = (Avion)getElemento(i);
 			txt.append("\nAVION: " + a.getNumero() + "\n");
-			txt.append("TIPO: " + a.getTipo() + "\n PASAJEROS: " + a.getPasajeros()  + "\n TURNOS DESABORDAJE: " + a.getTurnosDesabordaje() + "\n TURNOS MANTENIMIENTO " + a.getTurnosMantenimiento() + "\n");		
+			txt.append("	TIPO: " + a.getTipo() + "\n 	PASAJEROS: " + a.getPasajeros()  + "\n 	TURNOS DESABORDAJE: " + a.getTurnosDesabordaje() + "\n 	TURNOS MANTENIMIENTO " + a.getTurnosMantenimiento() + "\n");		
 		}
 	}
 }

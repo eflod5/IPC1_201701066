@@ -32,8 +32,7 @@ public class ListaCircularDoble extends Lista{
 		if(inicio!=null) {
 			if(p>0) {
 				int cont = 1;
-				Nodo aux =inicio;
-				
+				Nodo aux =inicio;				
 				while((aux.getSiguiente()!=inicio)&& (cont<p)){
 					cont ++;
 					aux = aux.getSiguiente();

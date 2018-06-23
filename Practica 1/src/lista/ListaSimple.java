@@ -19,7 +19,18 @@ public class ListaSimple extends Lista{
 		}		
 		size++;
 	}	
+	
+	public Object getElemento(int indice) {
+		indice = size - indice-1;
+		int cont = 0;
+		Nodo temporal = inicio;
 		
+		while(cont< indice) {
+			temporal = temporal.getSiguiente();
+			cont++;
+		}
+		return temporal.getObjeto();
+	}
 	
 	public void eliminar() {
 		

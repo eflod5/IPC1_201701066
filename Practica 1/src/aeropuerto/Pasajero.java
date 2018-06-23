@@ -32,4 +32,7 @@ public class Pasajero {
 		this.documentos = documentos;
 	}
 	
+	public String toString() {
+		return " " + getNumero();				
+	}
 }

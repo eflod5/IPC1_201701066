@@ -4,8 +4,7 @@ public class Cola extends Lista{
 	int tam=size;
 	
 	public Cola() {
-		super();
-		
+		super();		
 		tam=size;
 	}
 		
@@ -14,15 +13,14 @@ public class Cola extends Lista{
 	}
 			
 	public void insertar(Object objeto) {
-		Nodo nuevo = new Nodo(objeto);
 		
 		if(estaVacia()) {
-			inicio = nuevo;
+			inicio = new Nodo(objeto);
+			fin=inicio;
 		}
 		else {
-			fin.siguiente=nuevo;
-		}
-		fin=nuevo;
+			fin = fin.siguiente = new Nodo(objeto);
+		}		
 		tam++; //TAMAÑO
 	}
 	
@@ -37,7 +35,11 @@ public class Cola extends Lista{
 	}
 	
 	public Object inicioCola() {
+		if(inicio==null) {
+			return null;
+		}		
 		return inicio.getObjeto();
+			
 	}
 	
 	public Object getElemento(int indice) {

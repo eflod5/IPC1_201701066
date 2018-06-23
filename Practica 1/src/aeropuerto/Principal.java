@@ -11,19 +11,18 @@ public class Principal extends JFrame implements ActionListener{
 	private JTextField cAviones,cEstaciones;
 	private JButton bEmpezar,bPasarTurno;
 	private JTextArea aConsola;
-	private static ListaAviones lAvion;
-	private static ColaPasajero cPasajero;
-	private static ListaMaletas lMaletas;
-	private int cantAviones,turno=0,n=1,contador;
+	private ListaAviones lAvion;
+	private ColaPasajero cPasajero;
+	private ListaMaletas lMaletas;
+	private ColaAvion cAvion;
+	private ListaMantenimiento lMantenimiento;
+	private int cantAviones,turno=0,n=1,contador,cantEstaciones;
 	private int pasajeros,desabordaje,mantenimiento,maletas,documentos;
 	private String tam;
 	
 	public Principal() {
 		super("AEROPUERTO");
-		init();
-		lAvion = new ListaAviones();
-		cPasajero = new ColaPasajero();
-		lMaletas = new ListaMaletas();
+		init();		
 	}
 	public void init() {
 		setLayout(null);
@@ -100,21 +99,7 @@ public class Principal extends JFrame implements ActionListener{
 		
 		return panelConsola;
 	}	
-	
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==bEmpezar) {
-			cantAviones = Integer.parseInt(cAviones.getText());
-			
-		}
-		else if(e.getSource()==bPasarTurno) {						
-			lAvion.bajaTurno();
-			lAvion.eliminaAvion();
-			sacaPasajeros();
-			agregarAviones();			
-			turno++;						
-			imprimir();			
-		}
-	}
+	boolean iniciado = false;
 	
 	public void determinaTam() {
 		int x = (int)(Math.random()*3+1);
@@ -149,13 +134,20 @@ public class Principal extends JFrame implements ActionListener{
 		}									
 	}
 	
+	public void agregarEstaciones() {
+		while(cantEstaciones!=0) {
+			lMantenimiento.iniciarLista();
+			cantEstaciones--;
+		}
+	}
+	
 	public void sacaPasajeros() {
 		int x =5;
-		while(x!=0) {
+		while(x!=0) {					
+			lMaletas.eliminarMaleta(cPasajero.getMaletas());
 			cPasajero.eliminarPasajero();			
 			x--;
-		}
-		lMaletas.eliminar(1);
+		}				
 	}
 	
 	public void agregarPasajeros() {
@@ -174,20 +166,76 @@ public class Principal extends JFrame implements ActionListener{
 			contadorMaletas--;
 		}
 	}
+		
 	public void determinarDoc() {
 		maletas = (int)(Math.random()*4+1);
 		documentos = (int)(Math.random()*10+1);		
 	}
 	
 	public void imprimir() {
-		aConsola.append("\n+++++++++++++++++TURNO " + turno + "++++++++++++++++\n");
+		aConsola.append("\n+++++++++++++++++ TURNO " + turno + "++++++++++++++++\n");
 		aConsola.append("----------- AVIONES -----------\n");
 		lAvion.printAviones(aConsola);
 		aConsola.append("----------- PASAJEROS -----------\n");
 		cPasajero.printPasajero(aConsola);
 		aConsola.append("---------MALETAS---------\n");
 		lMaletas.printMaletas(aConsola);
+		aConsola.append("\n---------ESTACIONES---------\n");
+		lMantenimiento.printListaMantenimiento(aConsola);
+		aConsola.append("\n---------COLA---------\n");
+		cAvion.printColaAviones(aConsola);
+		aConsola.append("\n+++++++++++++++++ FIN TURNO " + turno + "++++++++++++++++\n");
 	}
 
-private int contadorMaletas,numeroMaleta=1;
+	public void comprobarVacio() {
+		if(lAvion.estaVacia() && lMaletas.estaVacia() && cPasajero.estaVacia() && cAvion.estaVacia()) {
+			System.out.println("Esta vacio");
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==bEmpezar) {
+			turno=0;
+			n=1;
+			contador=0;
+			numeroMaleta=1;
+			aConsola.setText("");
+			lAvion = new ListaAviones();
+			cPasajero = new ColaPasajero();
+			lMaletas = new ListaMaletas();
+			lMantenimiento = new ListaMantenimiento();
+			cAvion = new ColaAvion();
+			try {
+				cantAviones = Integer.parseInt(cAviones.getText());
+				cantEstaciones = Integer.parseInt(cEstaciones.getText());
+			}
+			catch(NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Unicamente se permiten numeros","ERROR",JOptionPane.ERROR_MESSAGE);
+			}
+			agregarEstaciones();
+		}
+		else if(e.getSource()==bPasarTurno) {						
+			lAvion.bajaTurno();
+			lMantenimiento.bajarTurno();
+			for (int i = 0; i < 5; i++) {
+				lAvion.eliminaAvion(cAvion);
+				lMantenimiento.terminaMantenimiento();
+				cAvion.pasarMantenimiento(lMantenimiento);
+			}
+			if(!iniciado) {
+				agregarAviones();			
+				turno++;						
+				imprimir();
+				iniciado = true;
+				return ;
+			}			
+			sacaPasajeros();			
+			agregarAviones();			
+			turno++;						
+			imprimir();
+			comprobarVacio();
+		}
+	}
+		
+	private int contadorMaletas,numeroMaleta=1;
 }

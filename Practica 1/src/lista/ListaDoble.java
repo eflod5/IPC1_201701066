@@ -47,7 +47,7 @@ public class ListaDoble extends Lista{
 			cont++;
 		}
 		return temporal.getObjeto();
-	}
+	}	
 	
 	public void eliminarElemento(int indice) {
 		indice = size - indice-1;
@@ -61,7 +61,7 @@ public class ListaDoble extends Lista{
 				temp = temp.getSiguiente();
 				cont++;
 			}
-			temp.setSiguiente(temp.getSiguiente().getSiguiente());
+			temp.setSiguiente(temp.getSiguiente());
 		}
 		size--;
 	}	

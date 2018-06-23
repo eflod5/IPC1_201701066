@@ -54,7 +54,7 @@ public class Avion {
 	}
 	
 	public String toString() {
-		return "TIPO: " + tipo + "\n PASAJEROS: " + pasajeros  + "\n TURNOS DESABORDAJE: " + turnosDesabordaje + "\n TURNOS MANTENIMIENTO " + turnosMantenimiento;
+		return "\n	AVION: " + numero +"\n	TIPO: " + tipo + "\n	PASAJEROS: " + pasajeros  + "\n	TURNOS DESABORDAJE: " + turnosDesabordaje + "\n	TURNOS MANTENIMIENTO " + turnosMantenimiento;
 	}
 
 }
