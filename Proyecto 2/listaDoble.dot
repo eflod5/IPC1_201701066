@@ -1,0 +1,7 @@
+digraph listadoble {  node[shape=record];
+nodo14582829[label="Avion: 2&#92;nTamaño: Mediano&#92;nPasajeros: 24&#92;nDesabordaje: 1&#92;nMantenimiento: 4"];
+nodo14582829->nodo32943154;
+nodo32943154->nodo14582829;
+nodo32943154[label="Avion: 3&#92;nTamaño: Pequeño&#92;nPasajeros: 9&#92;nDesabordaje: 1&#92;nMantenimiento: 1"];
+
+}

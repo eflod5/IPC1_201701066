@@ -1,0 +1,33 @@
+digraph listaEscritorio { node[shape=record]; 
+subgraph escritorio{
+nodo15664521[label="Escritorio: J&#92;nEstado: Ocupado&#92;nCliente: 2&#92;nDocumentos: 6&#92;nTurnos: 3&#92;nTotal Doc: 4"];
+nodo15664521->nodo13646506;
+nodo13646506->nodo15664521;
+nodo13646506[label="Escritorio: C&#92;nEstado: Ocupado&#92;nCliente: 9&#92;nDocumentos: 7&#92;nTurnos: 3&#92;nTotal Doc: 0"];
+nodo13646506->nodo26573140;
+nodo26573140->nodo13646506;
+nodo26573140[label="Escritorio: N&#92;nEstado: Disponible&#92;nTotal Doc: 0"];
+nodo26573140->nodo12282871;
+nodo12282871->nodo26573140;
+nodo12282871[label="Escritorio: T&#92;nEstado: Disponible&#92;nTotal Doc: 0"];
+nodo12282871->nodo58724;
+nodo58724->nodo12282871;
+nodo58724[label="Escritorio: F&#92;nEstado: Disponible&#92;nTotal Doc: 0"];
+
+rank = same  nodo15664521 nodo13646506 nodo26573140 nodo12282871}
+nodo15664521->nodo25755003;
+nodo25755003[label=" Pasajero: 3 &#92;nTurnos: 2"];
+nodo25755003->nodo2288175;
+nodo2288175[label=" Pasajero: 4 &#92;nTurnos: 1"];
+nodo2288175->nodo7473828;
+nodo7473828[label=" Pasajero: 5 &#92;nTurnos: 1"];
+nodo7473828->nodo28895541;
+nodo28895541[label=" Pasajero: 6 &#92;nTurnos: 3"];
+nodo28895541->nodo20128404;
+nodo20128404[label=" Pasajero: 7 &#92;nTurnos: 2"];
+nodo20128404->nodo17858120;
+nodo17858120[label=" Pasajero: 8 &#92;nTurnos: 3"];
+nodo13646506->nodo28550033;
+nodo28550033[label=" Pasajero: 10 &#92;nTurnos: 1"];
+
+}
