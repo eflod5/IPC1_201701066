@@ -11,7 +11,7 @@ public class ListaDoble extends Lista{
 		
 	}
 	
-	public void insertarInicio(Object objeto) {
+	public void insertar(Object objeto) {
 		if(inicio==null) {
 			inicio = new Nodo(objeto,null,null);
 			fin = inicio;
@@ -48,20 +48,22 @@ public class ListaDoble extends Lista{
 		}
 		return temporal.getObjeto();
 	}	
-	
+		
 	public void eliminarElemento(int indice) {
 		indice = size - indice-1;
 		if(indice==0) {
-			inicio = inicio.getSiguiente();
+			inicio = inicio.siguiente;
 		}
 		else {
 			int cont =0;
 			Nodo temp = inicio;
 			while(cont< indice-1) {
-				temp = temp.getSiguiente();
+				temp = temp.siguiente;
 				cont++;
 			}
-			temp.setSiguiente(temp.getSiguiente());
+			temp.setSiguiente(temp.getSiguiente().siguiente);
+			temp.setAnterior(temp.getAnterior());
+			temp=null;
 		}
 		size--;
 	}	

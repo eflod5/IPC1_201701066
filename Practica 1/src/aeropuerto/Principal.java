@@ -16,8 +16,9 @@ public class Principal extends JFrame implements ActionListener{
 	private ListaMaletas lMaletas;
 	private ColaAvion cAvion;
 	private ListaMantenimiento lMantenimiento;
-	private int cantAviones,turno=0,n=1,contador,cantEstaciones;
-	private int pasajeros,desabordaje,mantenimiento,maletas,documentos;
+	private int cantAviones,turno=0,n=1,contador,cantEstaciones,pasajeros,desabordaje,mantenimiento,maletas,documentos;
+	public static final String pequeño="Pequeño",mediano="Mediano",grande="Grande";
+	public static final int salidaPasajero=5;
 	private String tam;
 	
 	public Principal() {
@@ -104,19 +105,19 @@ public class Principal extends JFrame implements ActionListener{
 	public void determinaTam() {
 		int x = (int)(Math.random()*3+1);
 		if(x==1) {
-			tam = "Pequeño";
+			tam = pequeño;
 			desabordaje = 1;
 			pasajeros = (int) Math.floor(Math.random()*(10-5+1)+5);
 			mantenimiento = (int)(Math.random()*3+1);
 		}
 		else if(x==2) {
-			tam = "Mediano";
+			tam = mediano;
 			desabordaje = 2;
 			pasajeros = (int) Math.floor(Math.random()*(25-15+1)+15);
 			mantenimiento =  (int) Math.floor(Math.random()*(4-2+1)+2);
 		}
 		else if(x==3) {
-			tam ="Grande";
+			tam = grande;
 			desabordaje=3;
 			pasajeros = (int) Math.floor(Math.random()*(40-30+1)+30);
 			mantenimiento =  (int) Math.floor(Math.random()*(6-3+1)+3);
@@ -148,6 +149,14 @@ public class Principal extends JFrame implements ActionListener{
 			cPasajero.eliminarPasajero();			
 			x--;
 		}				
+	}
+	
+	public void sacaPasajeros(int cantidad) {
+		if(cantidad>0) {
+			lMaletas.eliminarMaleta(cPasajero.getMaletas());
+			cPasajero.eliminarPasajero();
+			sacaPasajeros(cantidad-1);
+		}
 	}
 	
 	public void agregarPasajeros() {
@@ -188,9 +197,9 @@ public class Principal extends JFrame implements ActionListener{
 	}
 
 	public void comprobarVacio() {
-		if(lAvion.estaVacia() && lMaletas.estaVacia() && cPasajero.estaVacia() && cAvion.estaVacia()) {
-			System.out.println("Esta vacio");
-		}
+		if(lAvion.estaVacia() && cAvion.estaVacia() && lMaletas.estaVacia() && cPasajero.estaVacia() && lMantenimiento.estaVacio()) {
+			JOptionPane.showMessageDialog(null, "Simulación finalizada con éxito","Fin",JOptionPane.INFORMATION_MESSAGE);
+		}		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -215,13 +224,6 @@ public class Principal extends JFrame implements ActionListener{
 			agregarEstaciones();
 		}
 		else if(e.getSource()==bPasarTurno) {						
-			lAvion.bajaTurno();
-			lMantenimiento.bajarTurno();
-			for (int i = 0; i < 5; i++) {
-				lAvion.eliminaAvion(cAvion);
-				lMantenimiento.terminaMantenimiento();
-				cAvion.pasarMantenimiento(lMantenimiento);
-			}
 			if(!iniciado) {
 				agregarAviones();			
 				turno++;						
@@ -229,7 +231,17 @@ public class Principal extends JFrame implements ActionListener{
 				iniciado = true;
 				return ;
 			}			
-			sacaPasajeros();			
+			lAvion.bajaTurno();
+			lMantenimiento.bajarTurno();
+			int x = 5;
+			while(x!=0) {
+				lAvion.eliminaAvion(cAvion);
+				lMantenimiento.terminaMantenimiento();
+				cAvion.pasarMantenimiento(lMantenimiento);
+				x--;
+			}
+			sacaPasajeros(salidaPasajero);			
+			if(cantAviones>0)
 			agregarAviones();			
 			turno++;						
 			imprimir();

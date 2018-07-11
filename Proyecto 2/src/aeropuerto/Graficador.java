@@ -29,6 +29,35 @@ public class Graficador {
 			}
 		}
 	}
+	public void crearDotCompleto(Nodo lAvion,Nodo lDesabordaje, Nodo lEscritorios, Nodo Equipaje, Nodo Mantenimiento, Nodo cola, String nombre) {
+		FileWriter fw = null;
+		PrintWriter pw = null;
+		
+		try {
+			fw = new FileWriter(nombre);
+			pw = new PrintWriter(fw);
+			pw.println("digraph sistemaCompleto { node[shape=record]; ");
+			pw.println("subgraph listaAvion { " + generarDotListaAvion(lAvion) + "}");
+			pw.println("subgraph desabordaje { " + generarDotDesabordaje(lDesabordaje) + "}");
+			pw.println("subgraph escritorios { subgraph escritorios1 { " + generarDotEscritorio(lEscritorios) + "rank = same " + rankEscritorio(lEscritorios) + "}" + escritorioPasajero(lEscritorios) + "}");
+			pw.println("subgraph mantenimiento { subgraph estacion {" + generarDotEstacion(Mantenimiento) + "rank = same" + rankEstacion(Mantenimiento) + "}" + "subgraph cola {" + generarDotColaAvion(cola) + "}" + mantEst(Mantenimiento,cola) + "}");			
+			pw.println("subgraph maletas { " + generarDotListaMaleta(Equipaje,Equipaje) + inicioFinMaleta(Equipaje) + "}");
+			pw.println("}");		
+			pw.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				fw.close();
+			}
+			catch(IOException ex) {
+				
+			}
+		}
+	}
+	
 	
 	public void crearDesabordaje(Nodo primero, String nombre) {
 		FileWriter fw = null;
@@ -93,6 +122,7 @@ public class Graficador {
 			pw = new PrintWriter(fw);
 			pw.println("digraph listacircular {");
 			pw.println(generarDotListaMaleta(primero,ultimo));
+			pw.println(inicioFinMaleta(primero));
 			pw.println("}");
 			pw.close();
 		}
@@ -302,12 +332,22 @@ public class Graficador {
 			cadena += "nodo" + reemplazar(primero.getSiguiente().hashCode())+ "->" + "nodo" + reemplazar(primero.getSiguiente().getAnterior().hashCode()) + ";\n";
 			cadena += generarDotListaMaleta(primero.getSiguiente(),ultimo);
 		}
-		if(primero.getSiguiente()==ultimo) {
+		/*else {
 			cadena += "nodo"+ reemplazar(primero.hashCode())+"->" +"nodo"+reemplazar(ultimo.hashCode()) + ";\n";	
 			cadena += "nodo" + reemplazar(ultimo.hashCode())+ "->" + "nodo" + reemplazar(primero.hashCode()) + ";\n";
-		}
+		}*/	
 		return cadena;
-	}	
+	}
+	public String inicioFinMaleta(Nodo primero) {
+		String cadena ="";
+		if(primero==null) {
+			return cadena;
+		}
+		cadena += "nodo"+ reemplazar(primero.hashCode())+"->" +"nodo"+reemplazar(primero.anterior.hashCode()) + ";\n";
+		cadena += "nodo"+ reemplazar(primero.anterior.hashCode())+ "->" + "nodo" + reemplazar(primero.hashCode()) + ";\n";
+		return cadena;
+	}
+	
 	
 	public void generarImagen(String direccionDot, String direccionImagen) {
 		String doPath ="C:\\Program Files\\Graphviz2.38\\bin\\dot.exe";		

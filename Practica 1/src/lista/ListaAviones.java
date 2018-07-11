@@ -12,12 +12,8 @@ public class ListaAviones extends ListaDoble{
 	
 	public void setAvion(int numero, String tipo, int pasajeros, int turnosDesabordaje, int turnosMantenimiento) {
 		Avion nuevo = new Avion(numero,tipo,pasajeros,turnosDesabordaje,turnosMantenimiento);		
-		insertarInicio(nuevo);
-	}
-	
-	public void setAvion(Avion nuevo) {
-		insertarFin(nuevo);
-	}
+		insertar(nuevo);
+	}	
 	
 	public Avion getAvion(int index) {
 		Avion a = (Avion)getElemento(index);
@@ -37,10 +33,10 @@ public class ListaAviones extends ListaDoble{
 			if(a.getTurnosDesabordaje()<=0) {
 				eliminarElemento(i);
 				cAvion.setAvion(a);
-			}
+			}			
 		}
 	}
-		
+			
 	
 	public void printAviones(JTextArea txt) {
 		for(int i=0 ; i<getSize();i++) {

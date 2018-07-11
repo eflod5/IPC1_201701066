@@ -1,19 +1,30 @@
 package aeropuerto;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 
 public class FrameGraficas extends JFrame {	
-	private ImageIcon nuevo;	
+	private ImageIcon nuevo;
+	private JScrollPane scroll;
 	
 	
 	public FrameGraficas(ImageIcon nuevo, String titulo) {
-		super("Grafica");
-		this.nuevo=nuevo;		
+		super("Grafica");		
 		add(getTitulo(titulo));
-		JScrollPane scroll = new JScrollPane(new JLabel(nuevo));
+		nuevo.getImage().flush();
+		scroll = new JScrollPane(new JLabel(nuevo));
 		scroll.setBounds(20, 100, 600, 450);
+		scroll.repaint();
 		add(scroll);
 		init();
+		
+		addWindowListener(new WindowAdapter() {
+			   public void windowClosing(WindowEvent e) {
+			    dispose();
+			   }
+			 });
 	}
 	
 	public void setIcon(ImageIcon nuevo) {
@@ -22,6 +33,7 @@ public class FrameGraficas extends JFrame {
 	public ImageIcon getIcon() {
 		return nuevo;
 	}		
+	
 	
 	public void init() {
 		setLayout(null);

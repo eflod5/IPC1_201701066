@@ -304,6 +304,7 @@ public class Tablero extends JPanel {
 		int height = this.getSize().height;		
 		try {		
 			fondo = ImageIO.read(getClass().getResource("/imagenes/fondo.jpg"));
+			
 		}
 		catch(IOException e) {
 			System.out.println("No se encuentra la imagen");

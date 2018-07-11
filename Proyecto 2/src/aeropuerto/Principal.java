@@ -192,9 +192,12 @@ public class Principal extends JFrame implements ActionListener{
 		}
 	}
 	
+	private int codigoNombre = 65;
 	public void agregarEscritorios() {			
-		while(cantEscritorios!=0) {			
-			lEscritorio.iniciarLista();
+		while(cantEscritorios!=0) {
+			char c = (char)codigoNombre;
+			lEscritorio.iniciarLista(c);
+			codigoNombre++;
 			cantEscritorios--;
 		}
 	}
@@ -262,6 +265,7 @@ public class Principal extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==bEmpezar) {
+			codigoNombre = 65;
 			turno=0;
 			n=1;
 			contador=0;
@@ -359,6 +363,13 @@ public class Principal extends JFrame implements ActionListener{
 			String titulo = "EQUIPAJE";
 			FrameGraficas frameGraficas = new FrameGraficas(icono,titulo);
 		}
+		else if(e.getSource()==JTodo) {
+			ruta ="C:\\Users\\Erik Flores\\Desktop\\Nueva carpeta\\IPC1_201701066\\Proyecto 2\\src\\imagenes\\sistema.png";
+			ImageIcon icono = new ImageIcon(ruta);
+			icono.getImage().flush();
+			String titulo = "SISTEMA COMPLETO";
+			FrameGraficas frameGraficas = new FrameGraficas(icono,titulo);
+		}
 	}
 	
 	public void graficar() {
@@ -377,6 +388,10 @@ public class Principal extends JFrame implements ActionListener{
 	
 		g.crearDotListaMaleta(lMaletas.getInicioNodo(), lMaletas.getInicioNodo(), "colaMaleta");
 		g.generarImagen("colaMaleta.dot", "C:\\Users\\Erik Flores\\Desktop\\Nueva carpeta\\IPC1_201701066\\Proyecto 2\\src\\imagenes\\listaEquipaje.png");
+	
+		g.crearDotCompleto(lAvion.getPrimero(), cPasajero.getInicioNodo(), lEscritorio.getInicioNodo(), lMaletas.getInicioNodo(), lMantenimiento.getInicioNodo(), cAvion.getInicioNodo(), "sistema.dot");
+		g.generarImagen("sistema.dot", "C:\\Users\\Erik Flores\\Desktop\\Nueva carpeta\\IPC1_201701066\\Proyecto 2\\src\\imagenes\\sistema.png");
+	
 	}
 	
 	private String ruta;

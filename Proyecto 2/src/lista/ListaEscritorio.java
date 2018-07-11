@@ -61,16 +61,14 @@ public class ListaEscritorio extends ListaDoble{
 		return espacio;
 	}
 	
-	public void determinaNombre() {
-		nombre = (char)(Math.random()*(90-65+1)+65);		
-	}
 	
-	public void iniciarLista() {
-		nombre = (char)(Math.random()*(90-65+1)+65);
+	
+	public void iniciarLista(char nombre) {
+		//nombre = (char)(Math.random()*(90-65+1)+65);
 		ColaPasajero colaPasajero = new ColaPasajero();
 		Pila pilaDocumentos = new Pila();
 		Escritorio nuevo = new Escritorio(true,null,nombre,colaPasajero,pilaDocumentos);
-		insertar(nuevo);
+		insertarFin(nuevo);
 	}
 	
 	public void bajarTurno(ListaMaletas l) {

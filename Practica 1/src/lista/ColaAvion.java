@@ -20,8 +20,7 @@ public class ColaAvion extends Cola{
 	
 	public void pasarMantenimiento(ListaMantenimiento lMantenimiento) {
 		if(inicioCola()==null) 
-			return ;
-		
+			return ;		
 		lMantenimiento.addAviones((Avion) inicioCola());
 		if(lMantenimiento.getEstado()) {
 			quitarAvion();

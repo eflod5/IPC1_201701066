@@ -30,11 +30,7 @@ public class ListaSimple extends Lista{
 			cont++;
 		}
 		return temporal.getObjeto();
-	}
-	
-	public void eliminar() {
-		
-	}
+	}	
 	
 	public void eliminarElemento(int indice) {
 		indice = size - indice-1;

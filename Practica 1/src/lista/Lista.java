@@ -41,6 +41,9 @@ public  abstract class Lista {
 		}
 	}
 		
+	public Object getIni() {
+		return inicio.getObjeto();
+	}
 	
 	public boolean estaVacia() {
 		if(inicio ==null) {

@@ -58,7 +58,22 @@ public class ListaMantenimiento extends ListaSimple{
 	public boolean getEstado() {
 		return x;
 	}
-			
+	
+	public boolean estaVacio() {
+		compruebaMantenimiento();
+		return estaVacio;
+	}
+	boolean estaVacio=false;;
+	
+	public void compruebaMantenimiento() {		
+		for(int i=0 ; i<getSize();i++) {
+			Mantenimiento m = (Mantenimiento)getElemento(i);
+			if(m.getEstado()) {
+				estaVacio=true;
+			}
+		}		
+	}
+	
 	public void printListaMantenimiento(JTextArea txt) {
 		for(int i=0 ; i<getSize();i++) {
 			Mantenimiento m = (Mantenimiento)getElemento(i);

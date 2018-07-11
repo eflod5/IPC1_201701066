@@ -1,13 +1,15 @@
 digraph listaMantenimiento { node[shape=record]; 
 subgraph estacion{
-nodo901965[label="Estacion: 1&#92;nEstado: Ocupado&#92;nAvion: 1&#92;nTamaño: Mediano&#92;nPasajeros: 20&#92;nDesabordaje: 0&#92;nMantenimiento: 4"];
-nodo901965->nodo28141208;
-nodo28141208[label="Estacion: 2&#92;nEstado: Disponible"];
-nodo28141208->nodo23122831;
-nodo23122831[label="Estacion: 3&#92;nEstado: Disponible"];
-nodo23122831->nodo14727795;
-nodo14727795[label="Estacion: 4&#92;nEstado: Disponible"];
+nodo31461026[label="Estacion: 1&#92;nEstado: Disponible"];
+nodo31461026->nodo12788416;
+nodo12788416[label="Estacion: 2&#92;nEstado: Disponible"];
+nodo12788416->nodo10768184;
+nodo10768184[label="Estacion: 3&#92;nEstado: Disponible"];
+nodo10768184->nodo26499405;
+nodo26499405[label="Estacion: 4&#92;nEstado: Disponible"];
+nodo26499405->nodo12372739;
+nodo12372739[label="Estacion: 5&#92;nEstado: Disponible"];
 
-rank = same nodo901965 nodo28141208 nodo23122831}
+rank = same nodo31461026 nodo12788416 nodo10768184 nodo26499405}
 subgraph cola {}
 }
